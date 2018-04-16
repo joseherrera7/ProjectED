@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using ProjectED1;
 using ProjectED1.Models;
+using ProjectED1.DBContext;
+
 namespace ProyectoED1.Controllers
 {
     public class LoginController : Controller
@@ -14,7 +16,7 @@ namespace ProyectoED1.Controllers
         {
             return View();
         }
-        DefaultConnection<Filme,string> db = DefaultConnection<Filme, string>.getInstance;
+        DefaultConnection<Movie,string> db = DefaultConnection<Movie, string>.getInstance;
 
 
 
@@ -38,7 +40,7 @@ namespace ProyectoED1.Controllers
 
                 if (newUser != null)
                 {
-                    UsuarioController uscontro = new UsuarioController();
+                   // UsuarioController uscontro = new UsuarioController();
 
 
 
