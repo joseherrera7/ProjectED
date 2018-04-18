@@ -1,0 +1,77 @@
+﻿@model ProjectED1.Models.User
+@{
+    ViewBag.Title = "Create";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Guaflix</title>
+
+<link rel="preload" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-js-dbfe879a/js/js/components%7Clogin%7CloginLayout.jsx,components%7Clogin%7CloginController.jsx,react%7CgenericClient.js/2/gF0ogAgdgcga4Fgf0F0w4zgkgE0t0T02gGgj4Pgngg0Cgzgw4Jglg7gpgB/l/true/none" as="script" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+<link type="text/css" rel="stylesheet" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-css-dbfe879a/css/css/login%7CloginBase.less,pages%7Clogin%7CLogin.less/2/0-0F0H0W080P0e0B0O0_0X0Q0V11/none/true/none" />
+<link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
+<link rel="apple-touch-icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png" />
+
+
+<div data-reactid="8">
+    <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
+    <div class="login-content login-form" data-reactid="10">
+        <h2 style="color:black;">Create</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal" style="color:black;">
+                <h4>Usuario</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.apellido, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.edad, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.edad, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.edad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Registrarse" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Login", "Index", "Login")
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
