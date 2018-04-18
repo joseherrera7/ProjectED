@@ -195,17 +195,60 @@ namespace ProjectED1.Controllers
             return View(userSearch);
         }
         // GET: User/Edit/5
-        
-
         // GET: User/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteMovies(string id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DeleteMovies(string id, FormCollection collection)
+        {
+            try
+            {
+
+                // TODO: Add delete logic here
+                Movie searchMovie = db.MoviesByName.buscar(id);
+                db.MoviesByGenre.eliminar(searchMovie);
+                db.MoviesByName.eliminar(id);
+                db.MoviesByYear.eliminar(searchMovie);
+                return RedirectToAction("Index", "User");
+            }
+            catch
+            {
+                ViewBag.Message("No se pudo eliminar");
+                return RedirectToAction("Index", "User");
+            }
+        }
+        // GET: User/Delete/5
+        public ActionResult DeleteUser(string id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DeleteUser(string id, FormCollection collection)
+        {
+            try
+            {
+                
+                // TODO: Add delete logic here
+                db.Users.eliminar(id);
+                return RedirectToAction("Index", "User");
+            }
+            catch
+            {
+                ViewBag.Message("No se pudo eliminar");
+                return RedirectToAction("Index", "User");
+            }
+        }
+        // GET: User/Delete/5
+        public ActionResult DeleteWatchList(string id)
         {
             return View();
         }
 
         // POST: User/Delete/5
         [HttpPost]
-        public ActionResult Delete(string id, FormCollection collection)
+        public ActionResult DeleteWatchList(string id, FormCollection collection)
         {
             try
             {
