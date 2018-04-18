@@ -13,7 +13,7 @@ namespace ProjectED1.DBContext
         private static volatile DefaultConnection<T, K> Instance;
         private static object syncRoot = new Object();
 
-        private static ComparadorNodosDelegate<K> comparator;
+       
         public ArbolB<User, string> Users = new ArbolB<User, string>(3, "", stringComparator);
         public ArbolB<Movie, string> MoviesByName = new ArbolB<Movie, string>(3, "", stringComparator);
         public ArbolB<Movie, Movie> MoviesByGenre = new ArbolB<Movie, Movie>(3, null, genreComparator);
