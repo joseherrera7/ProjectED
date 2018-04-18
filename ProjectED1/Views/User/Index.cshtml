@@ -1,5 +1,6 @@
-﻿@model IEnumerable<ProjectED1.Models.User>
-@{
+﻿@using ProjectED1.Models;
+@model IEnumerable<ProjectED1.Models.User> 
+
     Layout = null;
 }
 <!DOCTYPE html>
@@ -22,7 +23,18 @@
         <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
         <div class="login-content login-form" data-reactid="10">
 
-
+            <h2>Carga de Archivo Json para Lista de Usuario</h2>
+            @using (Html.BeginForm("Create", "CargaPartido", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <span>Seleccionar archivo:</span>
+                <input type="file" name="postedFile" />
+                <br />
+                <input type="submit" value="Subir" />
+                <span style="color:green">@ViewBag.Message</span><br />
+            }
+            <br />
+            <br />
+            <br />
 
             <p>
                 @Html.ActionLink("Create New", "Create")
@@ -66,14 +78,19 @@
                             @Html.DisplayFor(modelItem => item.password)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            @Html.ActionLink("Details", "Details", new { id = item.firstName }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.firstName })
                         </td>
                     </tr>
                 }
 
             </table>
+
+
+
+            @Html.ActionLink("Ir a Tabla de Películas", "Index2")
+
+
             </div>
         </div>
 </body>
