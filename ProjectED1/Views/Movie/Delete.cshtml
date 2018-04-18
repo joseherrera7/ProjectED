@@ -1,0 +1,76 @@
+﻿@model ProjectED1.Models.Movie
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+    <link rel="preload" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-js-dbfe879a/js/js/components%7Clogin%7CloginLayout.jsx,components%7Clogin%7CloginController.jsx,react%7CgenericClient.js/2/gF0ogAgdgcga4Fgf0F0w4zgkgE0t0T02gGgj4Pgngg0Cgzgw4Jglg7gpgB/l/true/none" as="script" />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-css-dbfe879a/css/css/login%7CloginBase.less,pages%7Clogin%7CLogin.less/2/0-0F0H0W080P0e0B0O0_0X0Q0V11/none/true/none" />
+    <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
+    <link rel="apple-touch-icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png" />
+</head>
+<body>
+    
+        
+
+
+        <div data-reactid="8">
+            <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
+            <div class="login-content login-form" data-reactid="10">
+                <h3 style="color:black;">¿Está seguro que quiere eliminar ésta pelicula?</h3>
+                <div style="color:black;">
+                    <h4>Movie</h4>
+                    <hr />
+                    <dl class="dl-horizontal" style="color:black;">
+                     
+                        <dt>
+                            @Html.DisplayNameFor(model => model.name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.year)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.year)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.genre)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.genre)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <button class="btn login-button btn-submit btn-small" type="submit" autocomplete="off" tabindex="4" data-reactid="25" value="Delete">Eliminar</button> 
+                            @Html.ActionLink("Regresar a peliculas", "Index")
+                        </div>
+                    }
+                </div>
+                </div>
+            </div>
+</body>
+</html>

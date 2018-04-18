@@ -37,7 +37,7 @@ namespace ProjectED1.Controllers
                 {
                     db.Users.insertar(user, user.username);
                     Response.Write("<script>alert('Usuario creado exitosamente.');</script>");
-                    return View();
+                    return RedirectToAction("Index", "Login");
                 }
             }
             catch

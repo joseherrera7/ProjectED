@@ -14,30 +14,29 @@
 <link type="text/css" rel="stylesheet" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-css-dbfe879a/css/css/login%7CloginBase.less,pages%7Clogin%7CLogin.less/2/0-0F0H0W080P0e0B0O0_0X0Q0V11/none/true/none" />
 <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
 <link rel="apple-touch-icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png" />
+<meta name="viewport" content="width=device-width" />
+
+<html>
+<body style="color:black;">
+    <div data-reactid="8">
+        <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
+        <div class="login-content login-form" data-reactid="10">
 
 
-<div data-reactid="8">
-    <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
-    <div class="login-content login-form" data-reactid="10">
-        <html>
-        <head>
-            <meta name="viewport" content="width=device-width" />
-            <title>View</title>
-        </head>
-        <body style="color:black;">
+
             <p>
                 @Html.ActionLink("Create New", "Create")
             </p>
             <table class="table" style="color:black;">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.nombre)
+                        @Html.DisplayNameFor(model => model.firstName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.apellido)
+                        @Html.DisplayNameFor(model => model.lastName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.edad)
+                        @Html.DisplayNameFor(model => model.Age)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.username)
@@ -52,13 +51,13 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
+                            @Html.DisplayFor(modelItem => item.firstName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.apellido)
+                            @Html.DisplayFor(modelItem => item.lastName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.edad)
+                            @Html.DisplayFor(modelItem => item.Age)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.username)
@@ -75,5 +74,7 @@
                 }
 
             </table>
-        </body>
-    </html>
+            </div>
+        </div>
+</body>
+</html>

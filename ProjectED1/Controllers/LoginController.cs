@@ -26,7 +26,7 @@ namespace ProyectoED1.Controllers
         {
             if(user=="admin"&& user == "admin")
             {
-                return RedirectToAction("Index", "Filme");
+                return RedirectToAction("Index", "Movie");
 
             } else {
                 User newUser = null;

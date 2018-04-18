@@ -3,28 +3,32 @@
     ViewBag.Title = "Details";
 }
 <!DOCTYPE html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Guaflix</title>
 
-<link rel="preload" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-js-dbfe879a/js/js/components%7Clogin%7CloginLayout.jsx,components%7Clogin%7CloginController.jsx,react%7CgenericClient.js/2/gF0ogAgdgcga4Fgf0F0w4zgkgE0t0T02gGgj4Pgngg0Cgzgw4Jglg7gpgB/l/true/none" as="script" />
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title style="color:black;">View</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Guaflix</title>
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
-<link type="text/css" rel="stylesheet" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-css-dbfe879a/css/css/login%7CloginBase.less,pages%7Clogin%7CLogin.less/2/0-0F0H0W080P0e0B0O0_0X0Q0V11/none/true/none" />
-<link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
-<link rel="apple-touch-icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png" />
+    <link rel="preload" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-js-dbfe879a/js/js/components%7Clogin%7CloginLayout.jsx,components%7Clogin%7CloginController.jsx,react%7CgenericClient.js/2/gF0ogAgdgcga4Fgf0F0w4zgkgE0t0T02gGgj4Pgngg0Cgzgw4Jglg7gpgB/l/true/none" as="script" />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-css-dbfe879a/css/css/login%7CloginBase.less,pages%7Clogin%7CLogin.less/2/0-0F0H0W080P0e0B0O0_0X0Q0V11/none/true/none" />
+    <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
+    <link rel="apple-touch-icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png" />
 
 
-<div data-reactid="8">
-    <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
-    <div class="login-content login-form" data-reactid="10">
-        <html>
-        <head>
-            <meta name="viewport" content="width=device-width" />
-            <title style="color:black;">View</title>
-        </head>
-        <body style="color:black;">
+</head>
+
+<html>
+<body style="color:black;">
+    <div data-reactid="8">
+        <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
+        <div class="login-content login-form" data-reactid="10">
+
+
             <div>
                 <h4>Usuario</h4>
                 <hr />
@@ -32,19 +36,19 @@
 
                     <dt>
 
-                        @Html.DisplayNameFor(model => model.nombre)
+                        @Html.DisplayNameFor(model => model.firstName)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.nombre)
+                        @Html.DisplayFor(model => model.firstName)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.apellido)
+                        @Html.DisplayNameFor(model => model.lastName)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.apellido)
+                        @Html.DisplayFor(model => model.lastName)
                     </dd>
 
                     <dt>
@@ -54,9 +58,9 @@
                     <dd>
                         @Html.DisplayFor(model => model.username)
                     </dd>
-
-                    <h3>Agregar un filme tu watch list</h3>
-                    <p><a href="/Filme/Catalogo_user" class="btn btn-primary btn-lg">Ir&raquo;</a></p>
+                    </dl>
+                    <h3>Agrega una pelicula a tu Watchlist, presionando aquí</h3>
+                    <p><a href="~/Movie/" class="btn btn-primary btn-lg">Ir&raquo;</a></p>
                     @Html.ActionLink("Logout", "logout")
             </div>
             <table>
@@ -64,37 +68,28 @@
             {
                 foreach (var item in Model.WatchList_lista)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tipo) |
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre) |
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.anio) |
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.genero) |
-                        </td>
-                        <td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name) |
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.year) |
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.genre) |
+                            </td>
+                            <td>
 
-                            @Html.ActionLink("Delete", "Deletewa", new { id = item.Nombre })
-                        </td>
-                    </tr>
-
-
+                                @Html.ActionLink("Borrar", "Deletewa", new { id = item.name })
+                            </td>
+                        </tr>
+                    }
                 }
-
-            }
-        </table>
-
-
-
-        <br>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-    </body>
+            </table>
+            <br>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+</body>
 </html>

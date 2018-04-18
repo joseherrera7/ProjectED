@@ -6,9 +6,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>Guaflix</title>
-
 <link rel="preload" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-js-dbfe879a/js/js/components%7Clogin%7CloginLayout.jsx,components%7Clogin%7CloginController.jsx,react%7CgenericClient.js/2/gF0ogAgdgcga4Fgf0F0w4zgkgE0t0T02gGgj4Pgngg0Cgzgw4Jglg7gpgB/l/true/none" as="script" />
-
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
 <link type="text/css" rel="stylesheet" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-css-dbfe879a/css/css/login%7CloginBase.less,pages%7Clogin%7CLogin.less/2/0-0F0H0W080P0e0B0O0_0X0Q0V11/none/true/none" />
 <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
@@ -22,30 +20,29 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-
             <div class="form-horizontal" style="color:black;">
                 <h4>Usuario</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.apellido, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.edad, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.edad, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.edad, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,3 +72,5 @@
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
         }
+        </div>
+    </div>
