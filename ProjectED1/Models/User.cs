@@ -15,9 +15,6 @@ namespace ProjectED1.Models
         public int Age { get; set; }
         public ArbolB<Movie, string> WatchList = new ArbolB<Movie, string>(3, "", moviesComparator);
         public List<Movie> WatchList_lista = new List<Movie>();
-        public static int moviesComparator(string actual, string Other)
-        {
-            return Other.CompareTo(actual);
-        }
+        
     }
 }

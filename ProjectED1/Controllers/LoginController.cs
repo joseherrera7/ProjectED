@@ -11,17 +11,18 @@ namespace ProyectoED1.Controllers
 {
     public class LoginController : Controller
     {
-
+        DefaultConnection<Movie, string> db = DefaultConnection<Movie, string>.getInstance;
         public ActionResult Index()
         {
             return View();
         }
-        DefaultConnection<Movie,string> db = DefaultConnection<Movie, string>.getInstance;
-
-
-
-
-        public ActionResult Verify(string user, string pass)
+        /// <summary>
+        /// Verifies the specified user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="pass">The pass.</param>
+        /// <returns></returns>
+        public ActionResult Login(string user, string pass)
         {
             if(user=="admin"&& user == "admin")
             {
@@ -29,7 +30,7 @@ namespace ProyectoED1.Controllers
 
             } else {
                 User newUser = null;
-                User searchUser = db.usuarios.buscar(user);
+                User searchUser = db.Users.buscar(user);
                 if (searchUser != null)
                 {
                     if (searchUser.username == user && searchUser.password == pass)
@@ -40,16 +41,10 @@ namespace ProyectoED1.Controllers
 
                 if (newUser != null)
                 {
-                   // UsuarioController uscontro = new UsuarioController();
-
-
-
                     return RedirectToAction("Details", "User", new { id = newUser.username });
-
                 }
                 else
                 {
-
                     return View("Index");
                 }
             }

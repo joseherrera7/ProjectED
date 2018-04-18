@@ -17,6 +17,34 @@ namespace ProjectED1.Controllers
         {
             return View();
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Admin/Create
+        [HttpPost]
+        public ActionResult Create([Bind(Include = "firstName,lastName,Age,username,password")]User user)
+        {
+            try
+            {
+                if (db.Users.existe(user.username))
+                {
+                    Response.Write("<script>alert('Ya existe este usuario.');</script>");
+                    return View();
+                }
+                else
+                {
+                    db.Users.insertar(user, user.username);
+                    Response.Write("<script>alert('Usuario creado exitosamente.');</script>");
+                    return View();
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
         /// <summary>
         /// Logouts this instance.
         /// </summary>
@@ -60,26 +88,7 @@ namespace ProjectED1.Controllers
             return View(userSearch);
         }
         // GET: User/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // GET: User/Delete/5
         public ActionResult Delete(int id)
@@ -89,17 +98,21 @@ namespace ProjectED1.Controllers
 
         // POST: User/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
+                Movie searchMovie = db.MoviesByName.buscar(id);
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                db.userLogged.WatchList.eliminar(searchMovie.name);
+                db.moviesList.Clear();
+                db.userLogged.WatchList.recorrer(asignComparator);
+                db.userLogged.WatchList.recorrer(toList);
+                return RedirectToAction("Details", new { id = db.userLogged.username });
             }
             catch
             {
-                return View();
+                return RedirectToAction("Details", new { id = db.userLogged.username });
             }
         }
         //FUNCIONES y METODOS
