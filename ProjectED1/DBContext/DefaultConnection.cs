@@ -13,30 +13,79 @@ namespace ProjectED1.DBContext
         private static volatile DefaultConnection<T, K> Instance;
         private static object syncRoot = new Object();
 
-        private static ComparadorNodosDelegate<K> comparador;
-        public ArbolB<User, string> usuarios = new ArbolB<User, string>(3, "", comparadorusuarios);
-        public ArbolB<T, K> catalogo = new ArbolB<T, K>(3, default(K), comparador);
+        private static ComparadorNodosDelegate<K> comparator;
+        public ArbolB<User, string> Users = new ArbolB<User, string>(3, "", stringComparator);
+        public ArbolB<Movie, string> MoviesByName = new ArbolB<Movie, string>(3, "", stringComparator);
+        public ArbolB<Movie, Movie> MoviesByGenre = new ArbolB<Movie, Movie>(3, null, genreComparator);
+        public ArbolB<Movie, Movie> MoviesByYear = new ArbolB<Movie, Movie>(3, null, yearComparator);
 
         public List<string> Ids = new List<string>();
-        public List<Movie> filmes_lista = new List<Movie>();
+        public List<Movie> moviesList = new List<Movie>();
         public int IDActual { get; set; }
-        public User usuariologeado;
-        public static int comparadorusuarios(string actual, string other)
+        public User userLogged;
+
+        /// <summary>
+        /// Genres the comparator.
+        /// </summary>
+        /// <param name="actual">The actual.</param>
+        /// <param name="Other">The other.</param>
+        /// <returns>-1 , 0, 1</returns>
+        public static int genreComparator(Movie actual, Movie Other)
+        {
+            if (Other.genre.CompareTo(actual.genre) == 0)
+            {
+
+                return Other.name.CompareTo(actual.name);
+            }
+            else
+            {
+
+                return Other.genre.CompareTo(actual.genre);
+            }
+
+        }
+        /// <summary>
+        /// Years the comparator.
+        /// </summary>
+        /// <param name="actual">The actual.</param>
+        /// <param name="Other">The other.</param>
+        /// <returns>-1 , 0, 1</returns>
+        public static int yearComparator(Movie actual, Movie Other)
+        {
+            if (Other.year.CompareTo(actual.year) == 0)
+            {
+
+                return Other.name.CompareTo(actual.name);
+            }
+            else
+            {
+
+                return Other.year.CompareTo(actual.year);
+            }
+        }
+        /// <summary>
+        /// Strings the comparator.
+        /// </summary>
+        /// <param name="actual">The actual.</param>
+        /// <param name="other">The other.</param>
+        /// <returns>-1 , 0, 1</returns>
+        public static int stringComparator(string actual, string other)
         {
             return other.CompareTo(actual);
         }
 
 
 
+
         public DefaultConnection()
         {
-            if (usuarios.contar() == 0)
+            if (Users.contar() == 0)
             {
                 IDActual = 0;
             }
             else
             {
-                IDActual = usuarios.contar() - 1;
+                IDActual = Users.contar() - 1;
             }
         }
 

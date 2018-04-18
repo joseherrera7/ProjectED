@@ -8,7 +8,7 @@
     <div><img src="~/Imagenes/Fondo7.png" width="1050" height="350" /></div>
     <h1>Registrate</h1>
     <h2>Si aun no creas sesión, este es el momento de hacerlo, recuerda colocar tus datos correctos</h2>
-    @using (Html.BeginForm("verificar", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Verify", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-group">

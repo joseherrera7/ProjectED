@@ -8,8 +8,3 @@ C:\Users\godin\Documents\Visual Studio 2015\Projects\ED1PROYECTO\ProyectoED1\TDA
 C:\Users\godin\Documents\Visual Studio 2015\Projects\ED1PROYECTO\ProyectoED1\TDA\obj\Debug\TDA.csprojResolveAssemblyReference.cache
 C:\Users\godin\Documents\Visual Studio 2015\Projects\ED1PROYECTO\ProyectoED1\TDA\obj\Debug\TDA.dll
 C:\Users\godin\Documents\Visual Studio 2015\Projects\ED1PROYECTO\ProyectoED1\TDA\obj\Debug\TDA.pdb
-C:\Users\JoseCarlos\Documents\GitHub\ProjectED1\TDA\bin\Debug\TDA.dll
-C:\Users\JoseCarlos\Documents\GitHub\ProjectED1\TDA\bin\Debug\TDA.pdb
-C:\Users\JoseCarlos\Documents\GitHub\ProjectED1\TDA\obj\Debug\TDA.csprojResolveAssemblyReference.cache
-C:\Users\JoseCarlos\Documents\GitHub\ProjectED1\TDA\obj\Debug\TDA.dll
-C:\Users\JoseCarlos\Documents\GitHub\ProjectED1\TDA\obj\Debug\TDA.pdb

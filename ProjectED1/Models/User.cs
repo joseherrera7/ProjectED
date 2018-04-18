@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TDA;
 
 namespace ProjectED1.Models
 {
@@ -11,5 +12,12 @@ namespace ProjectED1.Models
         public string lastName { get; set; }
         public string password { get; set; }
         public string username { get; set; }
+        public int Age { get; set; }
+        public ArbolB<Movie, string> WatchList = new ArbolB<Movie, string>(3, "", moviesComparator);
+        public List<Movie> WatchList_lista = new List<Movie>();
+        public static int moviesComparator(string actual, string Other)
+        {
+            return Other.CompareTo(actual);
+        }
     }
 }
