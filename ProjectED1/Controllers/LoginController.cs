@@ -14,6 +14,7 @@ namespace ProyectoED1.Controllers
         DefaultConnection<Movie, string> db = DefaultConnection<Movie, string>.getInstance;
         public ActionResult Index()
         {
+           
             return View();
         }
         /// <summary>
@@ -24,6 +25,8 @@ namespace ProyectoED1.Controllers
         /// <returns></returns>
         public ActionResult Login(string user, string pass)
         {
+
+           
             if(user=="admin"&& user == "admin")
             {
                 return RedirectToAction("Index", "User");
@@ -36,6 +39,7 @@ namespace ProyectoED1.Controllers
                     if (searchUser.username == user && searchUser.password == pass)
                     {
                         newUser = searchUser;
+                        db.userList.Add(newUser);
                     }
                 }
 

@@ -246,8 +246,16 @@
     <Content Include="Views\Movie\Create.cshtml" />
     <Content Include="Views\Movie\Delete.cshtml" />
     <Content Include="Views\Movie\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Movie\UserCatalogue.cshtml" />
     <Content Include="Views\User\Index2.cshtml" />
+=======
+    <Content Include="Views\User\UserCatalogue.cshtml" />
+    <Content Include="Views\User\Index2.cshtml" />
+    <Content Include="Views\User\DeleteWatchList.cshtml" />
+    <Content Include="Views\User\DeleteMovies.cshtml" />
+    <Content Include="Views\User\DeleteUser.cshtml" />
+>>>>>>> Admin
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

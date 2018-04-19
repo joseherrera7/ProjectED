@@ -59,15 +59,14 @@
                         @Html.DisplayFor(model => model.username)
                     </dd>
                     </dl>
-                    <h3>Agrega una pelicula a tu Watchlist, presionando aquí</h3>
-                    <p><a href="~/Movie/" class="btn btn-primary btn-lg">Ir&raquo;</a></p>
+                   @Html.ActionLink("Agregar una pelicula al watchList", "UserCatalogue")
                     @Html.ActionLink("Logout", "logout")
             </div>
             <table>
-                @if (Model.WatchList_lista != null)
-            {
-                foreach (var item in Model.WatchList_lista)
-                {
+              
+                    @foreach (var item in Model.WatchList_lista)
+                    {
+
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.name) |
@@ -80,7 +79,7 @@
                             </td>
                             <td>
 
-                                @Html.ActionLink("Borrar", "Deletewa", new { id = item.name })
+                                @Html.ActionLink("Borrar", "DeleteWatchList", new { id = item.name })
                             </td>
                         </tr>
                     }
@@ -88,7 +87,7 @@
             </table>
             <br>
             <p>
-                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                
                 @Html.ActionLink("Back to List", "Index")
             </p>
 </body>

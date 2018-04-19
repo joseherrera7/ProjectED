@@ -27,7 +27,7 @@
                     <div class="form-group" style="color:black;">
                         <select name="orden">
                             <option>Nombre</option>
-                            <option>Gémero</option>
+                            <option>Género</option>
                             <option>Año</option>
                         </select>
                         <button class="btn login-button btn-submit btn-small" type="submit" autocomplete="off" tabindex="4" data-reactid="25" value="Seleccionar">Seleccionar</button>
@@ -63,7 +63,7 @@
                                 @Html.DisplayFor(modelItem => item.genre)
                             </td>
                             <td>
-                                @Html.ActionLink("AddMovieWatchlist", "Agregar a WatchList", new { controller = "User", id = item.name }) |
+                                @Html.ActionLink("Agregar a WatchList", "AddMovieWatchlist", new { id = item.name })
 
                             </td>
                         </tr>

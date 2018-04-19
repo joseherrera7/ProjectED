@@ -1,0 +1,42 @@
+{
+  "nodo1": {
+    "name": "LALAL",
+    "year": 2018,
+    "genre": "Comedia"
+  },
+  "nodo2": {
+    "name": "FTS",
+    "year": 2018,
+    "genre": "Action"
+  },
+  "nodo3": {
+    "name": "TS",
+    "year": 2017,
+    "genre": "Animada"
+  },
+  "nodo4": {
+    "name": "InfinityWar",
+    "year": 2018,
+    "genre": "Accion"
+  },
+  "nodo5": {
+    "name": "InfinityWar2",
+    "year": 2019,
+    "genre": "Accion"
+  },
+  "nodo6": {
+    "name": "badman",
+    "year": 2018,
+    "genre": "Fool"
+  },
+  "nodo7": {
+    "name": "Matrix",
+    "year": 2006,
+    "genre": "Accion"
+  },
+  "nodo8": {
+    "name": "Matrix 2",
+    "year": 2007,
+    "genre": "Accion"
+  }
+}

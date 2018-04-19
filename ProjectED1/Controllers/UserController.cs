@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TDA;
@@ -16,62 +17,20 @@ namespace ProjectED1.Controllers
     {
         DefaultConnection<Movie, string> db = DefaultConnection<Movie, string>.getInstance;
         // GET: User
-        public ActionResult Index()
-        {
-            return View();
-        }
-        /// <summary>
-        /// Creates the by json.
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult CreateByJson()
-        {
-            return View();
-        }
-        /// <summary>
-        /// Creates this instance.
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: Admin/Create        
-        /// <summary>
-        /// Register the specified user.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <returns>returns to the login biew</returns>
-        [HttpPost]
-        public ActionResult Create([Bind(Include = "firstName,lastName,Age,username,password")]User user)
+        public ActionResult UserCatalogue()
         {
-            try
-            {
-                if (db.Users.existe(user.username))
-                {
-                    Response.Write("<script>alert('Ya existe este usuario.');</script>");
-                    return View();
-                }
-                else
-                {
-                    Response.Write("<script>alert('Usuario creado exitosamente.');</script>");
-                    db.Users.insertar(user, user.username);
-                    
-                    return RedirectToAction("Index", "Login");
-
-                }
-            }
-            catch
-            {
-                return View();
-            }
+            return View(db.moviesList.ToList());
+        }
+        public ActionResult Index2()
+        {
+            return View(db.moviesList.ToList());
         }
         [HttpPost]
-        public ActionResult CreateByJson(HttpPostedFileBase postedFile)
+        public ActionResult Index2(HttpPostedFileBase postedFile)
         {
 
-           
+
 
 
 
@@ -132,20 +91,116 @@ namespace ProjectED1.Controllers
                                 db.MoviesByYear.recorrer(To_ListInt);
 
                             }
-
-                            return RedirectToAction("Index");
                         }
-                        else
-                        {
-
-                            return RedirectToAction("Index");
-                        }
+                       
                     }
-                    ViewBag.Message = "Cargado Exitosamente";
+                    
                 }
                 catch (Exception)
                 {
-                    ViewBag.Message = "Dato erroneo.";
+                    ViewBag.Message = "CARGADO CORRECTAMENTE";
+                }
+
+            }
+
+            return View();
+        }
+        public ActionResult Index()
+        {
+            return View(db.userList.ToList());
+        }
+        /// <summary>
+        /// Creates the by json.
+        /// </summary>
+        /// <returns></returns>
+
+        /// <summary>
+        /// Creates this instance.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Admin/Create        
+        /// <summary>
+        /// Register the specified user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>returns to the login biew</returns>
+        [HttpPost]
+        public ActionResult Create([Bind(Include = "firstName,lastName,Age,username,password")]User user)
+        {
+            try
+            {
+                if (db.Users.existe(user.username))
+                {
+                    Response.Write("<script>alert('Ya existe este usuario.');</script>");
+                    return View();
+                }
+                else
+                {
+                    Response.Write("<script>alert('Usuario creado exitosamente.');</script>");
+                    db.Users.insertar(user, user.username);
+                    
+                    return RedirectToAction("Index", "Login");
+
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase postedFile)
+        {
+
+           
+
+
+
+            if (postedFile != null)
+            {
+
+
+                string filepath = string.Empty;
+
+                string path = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                filepath = path + Path.GetFileName(postedFile.FileName);
+                string extension = Path.GetExtension(postedFile.FileName);
+                postedFile.SaveAs(filepath);
+
+                string csvData = System.IO.File.ReadAllText(filepath);
+
+
+
+                try
+                {
+                    JObject json = JObject.Parse(csvData);
+                    db.userList.Clear();
+                    foreach (JProperty property in json.Properties())
+                    {
+
+                        string x = property.Value.ToString();
+                        User y = JsonConvert.DeserializeObject<User>(x);
+                        if (!db.Users.existe(y.firstName))
+                        {
+                           
+                            db.Users.insertar(y, y.firstName);
+                            db.userList.Add(y);
+                        }                  
+                    }
+                    
+                }
+                catch (Exception)
+                {
+                    ViewBag.Message("Cargado Exitosamente");
                 }
 
             }
@@ -173,16 +228,17 @@ namespace ProjectED1.Controllers
             if (db.userLogged.WatchList.existe(id))
             {
                 Response.Write("<script>alert('Pelicula ya fue agregada en su watchlist');</script>");
-                return RedirectToAction("Catalogo_user", "Filme");
+                return RedirectToAction("UserCatalogue", "User");
 
             }
             else
             {
                 db.userLogged.WatchList_lista.Clear();
-                db.userLogged.WatchList.recorrer(asignComparator);
-                db.MoviesByName.recorrer(asignComparator);
-                db.userLogged.WatchList.insertar(db.MoviesByName.buscar(id), db.MoviesByName.buscar(id).name);
+
+                Movie movieAPoner = db.moviesList.Find(x => x.name == id);
+                db.userLogged.WatchList.insertar(movieAPoner, movieAPoner.name);
                 db.userLogged.WatchList.recorrer(toList);
+                
                 return RedirectToAction("Details", new { id = db.userLogged.username });
             }
 
@@ -198,20 +254,49 @@ namespace ProjectED1.Controllers
         // GET: User/Delete/5
         public ActionResult DeleteMovies(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Movie moviesearch = db.MoviesByName.buscar(id);
+
+            if (moviesearch == null)
+            {
+
+                return HttpNotFound();
+            }
+            return View(moviesearch);
         }
         [HttpPost]
         public ActionResult DeleteMovies(string id, FormCollection collection)
         {
             try
             {
-
+                Movie filmebuscado = db.MoviesByName.buscar(id);
                 // TODO: Add delete logic here
-                Movie searchMovie = db.MoviesByName.buscar(id);
-                db.MoviesByGenre.eliminar(searchMovie);
-                db.MoviesByName.eliminar(id);
-                db.MoviesByYear.eliminar(searchMovie);
-                return RedirectToAction("Index", "User");
+                db.MoviesByName.eliminar(filmebuscado.name);
+                db.MoviesByGenre.eliminar(filmebuscado);
+                db.MoviesByYear.eliminar(filmebuscado);
+                db.moviesList.Clear();
+                db.MoviesByName.recorrer(AsignNameComparator);
+                db.MoviesByGenre.recorrer(AsignGenreComparator);
+                db.MoviesByYear.recorrer(AsignYearComparator);
+                if (OrderSelection == "genero")
+                {
+                    db.MoviesByGenre.recorrer(To_ListGenre);
+
+                }
+                else if (OrderSelection == "nombre")
+                {
+                    db.MoviesByName.recorrer(To_List);
+
+                }
+                else if (OrderSelection == "anio")
+                {
+                    db.MoviesByYear.recorrer(To_ListInt);
+
+                }
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -222,16 +307,29 @@ namespace ProjectED1.Controllers
         // GET: User/Delete/5
         public ActionResult DeleteUser(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User moviesearch = db.Users.buscar(id);
+
+            if (moviesearch == null)
+            {
+
+                return HttpNotFound();
+            }
+            return View(moviesearch);
+           
         }
         [HttpPost]
         public ActionResult DeleteUser(string id, FormCollection collection)
         {
             try
             {
-                
+                User moviesearch = db.Users.buscar(id);
                 // TODO: Add delete logic here
                 db.Users.eliminar(id);
+                db.userList.Remove(moviesearch);
                 return RedirectToAction("Index", "User");
             }
             catch
@@ -243,7 +341,17 @@ namespace ProjectED1.Controllers
         // GET: User/Delete/5
         public ActionResult DeleteWatchList(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Movie searchMovie = db.moviesList.Find(x => x.name == id);
+            if (searchMovie == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(searchMovie);
         }
 
         // POST: User/Delete/5
@@ -252,10 +360,10 @@ namespace ProjectED1.Controllers
         {
             try
             {
-                Movie searchMovie = db.MoviesByName.buscar(id);
+                Movie searchMovie = db.moviesList.Find(x => x.name == id);
                 // TODO: Add delete logic here
                 db.userLogged.WatchList.eliminar(searchMovie.name);
-                db.moviesList.Clear();
+                db.userLogged.WatchList_lista.Remove(searchMovie);
                 db.userLogged.WatchList.recorrer(asignComparator);
                 db.userLogged.WatchList.recorrer(toList);
                 return RedirectToAction("Details", new { id = db.userLogged.username });

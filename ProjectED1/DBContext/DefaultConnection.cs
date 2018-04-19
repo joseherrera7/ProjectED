@@ -21,6 +21,7 @@ namespace ProjectED1.DBContext
 
         public List<string> Ids = new List<string>();
         public List<Movie> moviesList = new List<Movie>();
+        public List<User> userList = new List<User>();
         public int IDActual { get; set; }
         public User userLogged;
 
