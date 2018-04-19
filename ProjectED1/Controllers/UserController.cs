@@ -24,10 +24,7 @@ namespace ProjectED1.Controllers
         /// Creates the by json.
         /// </summary>
         /// <returns></returns>
-        public ActionResult CreateByJson()
-        {
-            return View();
-        }
+
         /// <summary>
         /// Creates this instance.
         /// </summary>
@@ -68,7 +65,7 @@ namespace ProjectED1.Controllers
             }
         }
         [HttpPost]
-        public ActionResult CreateByJson(HttpPostedFileBase postedFile)
+        public ActionResult Index(HttpPostedFileBase postedFile)
         {
 
            

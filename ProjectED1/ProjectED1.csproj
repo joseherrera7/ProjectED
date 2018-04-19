@@ -247,6 +247,7 @@
     <Content Include="Views\Movie\Delete.cshtml" />
     <Content Include="Views\Movie\Index.cshtml" />
     <Content Include="Views\Movie\UserCatalogue.cshtml" />
+    <Content Include="Views\User\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
