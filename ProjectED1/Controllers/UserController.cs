@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TDA;
@@ -16,9 +17,97 @@ namespace ProjectED1.Controllers
     {
         DefaultConnection<Movie, string> db = DefaultConnection<Movie, string>.getInstance;
         // GET: User
+
+        public ActionResult UserCatalogue()
+        {
+            return View(db.moviesList.ToList());
+        }
+        public ActionResult Index2()
+        {
+            return View(db.moviesList.ToList());
+        }
+        [HttpPost]
+        public ActionResult Index2(HttpPostedFileBase postedFile)
+        {
+
+
+
+
+
+            if (postedFile != null)
+            {
+
+
+                string filepath = string.Empty;
+
+                string path = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                filepath = path + Path.GetFileName(postedFile.FileName);
+                string extension = Path.GetExtension(postedFile.FileName);
+                postedFile.SaveAs(filepath);
+
+                string csvData = System.IO.File.ReadAllText(filepath);
+
+
+
+                try
+                {
+                    JObject json = JObject.Parse(csvData);
+
+                    foreach (JProperty property in json.Properties())
+                    {
+
+                        string x = property.Value.ToString();
+                        Movie y = JsonConvert.DeserializeObject<Movie>(x);
+                        if (!db.MoviesByName.existe(y.name))
+                        {
+                            db.moviesList.Clear();
+                            db.MoviesByName.recorrer(AsignNameComparator);
+                            db.MoviesByGenre.recorrer(AsignGenreComparator);
+                            db.MoviesByYear.recorrer(AsignYearComparator);
+                            elemento<Movie, string> newMovieByName = new elemento<Movie, string>(y, y.name, nameComparator);
+                            elemento<Movie, Movie> newMovieByGenre = new elemento<Movie, Movie>(y, y, genreComparator);
+                            elemento<Movie, Movie> newMovieByYear = new elemento<Movie, Movie>(y, y, yearComparator);
+
+                            db.MoviesByName.insertar(newMovieByName.valor, newMovieByName.valor.name);
+                            db.MoviesByGenre.insertar(newMovieByGenre.valor, newMovieByGenre.valor);
+                            db.MoviesByYear.insertar(newMovieByYear.valor, newMovieByYear.valor);
+
+                            if (OrderSelection == "genero")
+                            {
+                                db.MoviesByGenre.recorrer(To_ListGenre);
+
+                            }
+                            else if (OrderSelection == "nombre")
+                            {
+                                db.MoviesByName.recorrer(To_List);
+
+                            }
+                            else if (OrderSelection == "anio")
+                            {
+                                db.MoviesByYear.recorrer(To_ListInt);
+
+                            }
+                        }
+                       
+                    }
+                    
+                }
+                catch (Exception)
+                {
+                    ViewBag.Message = "CARGADO CORRECTAMENTE";
+                }
+
+            }
+
+            return View();
+        }
         public ActionResult Index()
         {
-            return View();
+            return View(db.userList.ToList());
         }
         /// <summary>
         /// Creates the by json.
@@ -94,55 +183,24 @@ namespace ProjectED1.Controllers
                 try
                 {
                     JObject json = JObject.Parse(csvData);
-
+                    db.userList.Clear();
                     foreach (JProperty property in json.Properties())
                     {
 
                         string x = property.Value.ToString();
-                        Movie y = JsonConvert.DeserializeObject<Movie>(x);
-                        if (!db.MoviesByName.existe(y.name))
+                        User y = JsonConvert.DeserializeObject<User>(x);
+                        if (!db.Users.existe(y.firstName))
                         {
-                            db.moviesList.Clear();
-                            db.MoviesByName.recorrer(AsignNameComparator);
-                            db.MoviesByGenre.recorrer(AsignGenreComparator);
-                            db.MoviesByYear.recorrer(AsignYearComparator);
-                            elemento<Movie, string> newMovieByName = new elemento<Movie, string>(y, y.name, nameComparator);
-                            elemento<Movie, Movie> newMovieByGenre = new elemento<Movie, Movie>(y, y, genreComparator);
-                            elemento<Movie, Movie> newMovieByYear = new elemento<Movie, Movie>(y, y, yearComparator);
-
-                            db.MoviesByName.insertar(newMovieByName.valor, newMovieByName.valor.name);
-                            db.MoviesByGenre.insertar(newMovieByGenre.valor, newMovieByGenre.valor);
-                            db.MoviesByYear.insertar(newMovieByYear.valor, newMovieByYear.valor);
-
-                            if (OrderSelection == "genero")
-                            {
-                                db.MoviesByGenre.recorrer(To_ListGenre);
-
-                            }
-                            else if (OrderSelection == "nombre")
-                            {
-                                db.MoviesByName.recorrer(To_List);
-
-                            }
-                            else if (OrderSelection == "anio")
-                            {
-                                db.MoviesByYear.recorrer(To_ListInt);
-
-                            }
-
-                            return RedirectToAction("Index");
-                        }
-                        else
-                        {
-
-                            return RedirectToAction("Index");
-                        }
+                           
+                            db.Users.insertar(y, y.firstName);
+                            db.userList.Add(y);
+                        }                  
                     }
-                    ViewBag.Message = "Cargado Exitosamente";
+                    
                 }
                 catch (Exception)
                 {
-                    ViewBag.Message = "Dato erroneo.";
+                    ViewBag.Message("Cargado Exitosamente");
                 }
 
             }
@@ -170,16 +228,17 @@ namespace ProjectED1.Controllers
             if (db.userLogged.WatchList.existe(id))
             {
                 Response.Write("<script>alert('Pelicula ya fue agregada en su watchlist');</script>");
-                return RedirectToAction("Catalogo_user", "Filme");
+                return RedirectToAction("UserCatalogue", "User");
 
             }
             else
             {
                 db.userLogged.WatchList_lista.Clear();
-                db.userLogged.WatchList.recorrer(asignComparator);
-                db.MoviesByName.recorrer(asignComparator);
-                db.userLogged.WatchList.insertar(db.MoviesByName.buscar(id), db.MoviesByName.buscar(id).name);
+
+                Movie movieAPoner = db.moviesList.Find(x => x.name == id);
+                db.userLogged.WatchList.insertar(movieAPoner, movieAPoner.name);
                 db.userLogged.WatchList.recorrer(toList);
+                
                 return RedirectToAction("Details", new { id = db.userLogged.username });
             }
 
@@ -195,20 +254,49 @@ namespace ProjectED1.Controllers
         // GET: User/Delete/5
         public ActionResult DeleteMovies(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Movie moviesearch = db.MoviesByName.buscar(id);
+
+            if (moviesearch == null)
+            {
+
+                return HttpNotFound();
+            }
+            return View(moviesearch);
         }
         [HttpPost]
         public ActionResult DeleteMovies(string id, FormCollection collection)
         {
             try
             {
-
+                Movie filmebuscado = db.MoviesByName.buscar(id);
                 // TODO: Add delete logic here
-                Movie searchMovie = db.MoviesByName.buscar(id);
-                db.MoviesByGenre.eliminar(searchMovie);
-                db.MoviesByName.eliminar(id);
-                db.MoviesByYear.eliminar(searchMovie);
-                return RedirectToAction("Index", "User");
+                db.MoviesByName.eliminar(filmebuscado.name);
+                db.MoviesByGenre.eliminar(filmebuscado);
+                db.MoviesByYear.eliminar(filmebuscado);
+                db.moviesList.Clear();
+                db.MoviesByName.recorrer(AsignNameComparator);
+                db.MoviesByGenre.recorrer(AsignGenreComparator);
+                db.MoviesByYear.recorrer(AsignYearComparator);
+                if (OrderSelection == "genero")
+                {
+                    db.MoviesByGenre.recorrer(To_ListGenre);
+
+                }
+                else if (OrderSelection == "nombre")
+                {
+                    db.MoviesByName.recorrer(To_List);
+
+                }
+                else if (OrderSelection == "anio")
+                {
+                    db.MoviesByYear.recorrer(To_ListInt);
+
+                }
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -219,16 +307,29 @@ namespace ProjectED1.Controllers
         // GET: User/Delete/5
         public ActionResult DeleteUser(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User moviesearch = db.Users.buscar(id);
+
+            if (moviesearch == null)
+            {
+
+                return HttpNotFound();
+            }
+            return View(moviesearch);
+           
         }
         [HttpPost]
         public ActionResult DeleteUser(string id, FormCollection collection)
         {
             try
             {
-                
+                User moviesearch = db.Users.buscar(id);
                 // TODO: Add delete logic here
                 db.Users.eliminar(id);
+                db.userList.Remove(moviesearch);
                 return RedirectToAction("Index", "User");
             }
             catch
@@ -240,7 +341,17 @@ namespace ProjectED1.Controllers
         // GET: User/Delete/5
         public ActionResult DeleteWatchList(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Movie searchMovie = db.moviesList.Find(x => x.name == id);
+            if (searchMovie == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(searchMovie);
         }
 
         // POST: User/Delete/5
@@ -249,10 +360,10 @@ namespace ProjectED1.Controllers
         {
             try
             {
-                Movie searchMovie = db.MoviesByName.buscar(id);
+                Movie searchMovie = db.moviesList.Find(x => x.name == id);
                 // TODO: Add delete logic here
                 db.userLogged.WatchList.eliminar(searchMovie.name);
-                db.moviesList.Clear();
+                db.userLogged.WatchList_lista.Remove(searchMovie);
                 db.userLogged.WatchList.recorrer(asignComparator);
                 db.userLogged.WatchList.recorrer(toList);
                 return RedirectToAction("Details", new { id = db.userLogged.username });

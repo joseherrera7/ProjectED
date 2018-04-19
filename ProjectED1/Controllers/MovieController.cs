@@ -12,17 +12,101 @@ namespace ProjectED1.Controllers
     public class MovieController : Controller
     {
         DefaultConnection<Movie, string> db = DefaultConnection<Movie, string>.getInstance;
-        // GET: Movie
+
+        string seleccionorden = "nombre";
+        // GET: Filme
         public ActionResult Index()
         {
-            return View();
+
+            return View(db.moviesList.ToList());
+
         }
 
-        // GET: Movie/Details/5
-        public ActionResult Details(int id)
+       
+
+        public void pasar_a_lista(elemento<Movie, string> actual)
         {
-            return View();
+            db.moviesList.Add(actual.valor);
         }
+
+        public void pasar_a_lista_gen(elemento<Movie, Movie> actual)
+        {
+            db.moviesList.Add(actual.valor);
+        }
+        public void pasar_a_lista_int(elemento<Movie, Movie> actual)
+        {
+            db.moviesList.Add(actual.valor);
+        }
+
+        public void asignar_comparador_nombre(elemento<Movie, string> actual)
+        {
+            actual.comparador = comparadornombres;
+        }
+        public void asignar_comparador_genero(elemento<Movie, Movie> actual)
+        {
+            actual.comparador = comparadorgeneros;
+        }
+        public void asignar_comparador_anio(elemento<Movie, Movie> actual)
+        {
+            actual.comparador = comparadoranio;
+        }
+        public int comparadornombres(string actual, string Other)
+        {
+            return Other.CompareTo(actual);
+        }
+        public int comparadorgeneros(Movie actual, Movie Other)
+        {
+
+            if (Other.genre.CompareTo(actual.genre) == 0)
+            {
+
+                return Other.name.CompareTo(actual.name);
+            }
+            else
+            {
+
+                return Other.genre.CompareTo(actual.genre);
+            }
+
+        }
+        public int comparadoranio(Movie actual, Movie Other)
+        {
+            if (Other.year.CompareTo(actual.year) == 0)
+            {
+
+                return Other.name.CompareTo(actual.name);
+            }
+            else
+            {
+
+                return Other.year.CompareTo(actual.year);
+            }
+        }
+
+        public ActionResult cambiar_orden(string orden)
+        {
+            seleccionorden = orden;
+            db.moviesList.Clear();
+            if (orden == "genero")
+            {
+
+                db.MoviesByGenre.recorrer(pasar_a_lista_gen);
+
+            }
+            else if (orden == "nombre")
+            {
+                db.MoviesByName.recorrer(pasar_a_lista);
+
+            }
+            else if (orden == "año")
+            {
+                db.MoviesByYear.recorrer(pasar_a_lista_int);
+
+            }
+
+            return RedirectToAction("UserCatalogue");
+        }
+
 
         // GET: Movie/Create
         public ActionResult Create()

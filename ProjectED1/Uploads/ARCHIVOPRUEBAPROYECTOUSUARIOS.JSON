@@ -1,0 +1,17 @@
+{
+    "nodo1": {
+        "firstName": "pepe",
+        "lastName": "juarez",
+        "Age": 18,
+        "username": "pepe",
+        "password":  "pepe"
+    },
+    "nodo2": {
+        "firstName": "pepo",
+        "lastName": "juaez",
+        "Age": 18,
+        "username": "asda",
+        "password":  "asda"
+    }
+
+}

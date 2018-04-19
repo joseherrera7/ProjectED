@@ -14,13 +14,7 @@ namespace ProyectoED1.Controllers
         DefaultConnection<Movie, string> db = DefaultConnection<Movie, string>.getInstance;
         public ActionResult Index()
         {
-            User admin = new ProjectED1.Models.User();
-            admin.username ="admin";
-            admin.firstName = "admin";
-            admin.lastName = "admin";
-            admin.Age = 0;
-            admin.password = "admin";
-            db.Users.insertar(admin, admin.firstName);
+           
             return View();
         }
         /// <summary>
@@ -45,6 +39,7 @@ namespace ProyectoED1.Controllers
                     if (searchUser.username == user && searchUser.password == pass)
                     {
                         newUser = searchUser;
+                        db.userList.Add(newUser);
                     }
                 }
 
