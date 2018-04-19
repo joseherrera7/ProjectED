@@ -190,6 +190,17 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fotos\Fondo1.jpg" />
+    <Content Include="Fotos\Fondo10.jpg" />
+    <Content Include="Fotos\fondo11.jpg" />
+    <Content Include="Fotos\Fondo2.jpg" />
+    <Content Include="Fotos\fondo3.png" />
+    <Content Include="Fotos\fondo4.jpg" />
+    <Content Include="Fotos\fondo5.jpg" />
+    <Content Include="Fotos\fondo6.png" />
+    <Content Include="Fotos\Fondo7.png" />
+    <Content Include="Fotos\Fondo8.jpg" />
+    <Content Include="Fotos\Fondo9.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -246,16 +257,12 @@
     <Content Include="Views\Movie\Create.cshtml" />
     <Content Include="Views\Movie\Delete.cshtml" />
     <Content Include="Views\Movie\Index.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Movie\UserCatalogue.cshtml" />
-    <Content Include="Views\User\Index2.cshtml" />
-=======
     <Content Include="Views\User\UserCatalogue.cshtml" />
     <Content Include="Views\User\Index2.cshtml" />
     <Content Include="Views\User\DeleteWatchList.cshtml" />
     <Content Include="Views\User\DeleteMovies.cshtml" />
     <Content Include="Views\User\DeleteUser.cshtml" />
->>>>>>> Admin
+    <Content Include="Views\User\Buscar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

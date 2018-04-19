@@ -5,10 +5,6 @@
     ViewBag.Title = "Index2";
 }
 
-<<<<<<< HEAD
-<h2>Lista de Películas</h2>
-=======
->>>>>>> Admin
 <!DOCTYPE html>
 
 <html>
@@ -25,60 +21,28 @@
     <link type="text/css" rel="stylesheet" href="https://codex.nflxext.com/%5E2.0.0/truthBundle/webui/0.0.1-shakti-css-dbfe879a/css/css/login%7CloginBase.less,pages%7Clogin%7CLogin.less/2/0-0F0H0W080P0e0B0O0_0X0Q0V11/none/true/none" />
     <link rel="shortcut icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico" />
     <link rel="apple-touch-icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png" />
+    
 </head>
 <body>
 
-<<<<<<< HEAD
-
-    <h2>Carga de Archivo Json para Lista de Peliculas</h2>
-    @using (Html.BeginForm("Create", "CargaPartido", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <span>Seleccionar archivo:</span>
-        <input type="file" name="postedFile" />
-        <br />
-        <input type="submit" value="Subir" />
-            <span style="color:green">@ViewBag.Message</span><br />
-=======
     <h1>Administrador</h1>
     <h2>Tabla de Películas</h2>
     <h2>Carga de Archivo Json De Peliculas</h2>
     @using (Html.BeginForm("Index2", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-        <span>Seleccionar archivo:</span>
+        <span>Seleccionar archivo (Al subirlo debe recargar la página):</span>
                 <input type="file" name="postedFile" />
                 <br />
                 <input type="submit" value="Subir" />
                 <span style="color:green">@ViewBag.Message</span><br />
->>>>>>> Admin
     }
     <br />
     <br />
     <br />
-<<<<<<< HEAD
-
-    <div data-reactid="8">
-        <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
-        <div class="login-content login-form" data-reactid="10">
-            @using (Html.BeginForm("cambiar_orden", "Movie", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <div class="form-group" style="color:black;">
-                    <select name="orden">
-                        <option>Nombre</option>
-                        <option>Genero</option>
-                        <option>Año</option>
-                    </select>
-                    <button class="btn login-button btn-submit btn-small" type="submit" autocomplete="off" tabindex="4" data-reactid="25" value="Seleccionar">Seleccionar</button>
-
-                </div>
-
-
-            }
-=======
     <div data-reactid="8">
         <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
         <div class="login-content login-form" data-reactid="10">
            
->>>>>>> Admin
 
             <table class="table" style="color:black;">
                 <tr>
@@ -109,11 +73,7 @@
                             </td>
                             <td>
 
-<<<<<<< HEAD
-                                @Html.ActionLink("Delete", "Delete", new { id = item.name })
-=======
                                 @Html.ActionLink("Delete", "DeleteMovies", new { id = item.name })
->>>>>>> Admin
                             </td>
                         </tr>
                     }

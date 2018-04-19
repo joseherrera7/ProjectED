@@ -1,9 +1,5 @@
 ﻿@using ProjectED1.Models;
-<<<<<<< HEAD
-@model IEnumerable<ProjectED1.Models.User> 
-=======
 @model IEnumerable<ProjectED1.Models.User>
->>>>>>> Admin
 
     Layout = null;
 }
@@ -26,18 +22,12 @@
     <div data-reactid="8">
         <noscript data-reactid="9">&lt;div class="ui-message-container ui-message-error"&gt;&lt;div class="ui-message-icon"&gt;&lt;/div&gt;&lt;div class="ui-message-contents"&gt;Parece que JavaScript no está habilitado. Habilita JavaScript para restaurar la funcionalidad de la página completa.&lt;/div&gt;&lt;/div&gt;</noscript>
         <div class="login-content login-form" data-reactid="10">
-<<<<<<< HEAD
-
-            <h2>Carga de Archivo Json para Lista de Usuario</h2>
-            @using (Html.BeginForm("Create", "CargaPartido", FormMethod.Post, new { enctype = "multipart/form-data" }))
-=======
             <h1>Administrador</h1>
             <h2>Tabla de Usuarios</h2>
             <h2>Carga de Archivo Json De Usuarios</h2>
             @using (Html.BeginForm("Index", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
->>>>>>> Admin
             {
-                <span>Seleccionar archivo:</span>
+                <span>Seleccionar archivo (Al subirlo debe recargar la página):</span>
                 <input type="file" name="postedFile" />
                 <br />
                 <input type="submit" value="Subir" />
@@ -46,11 +36,7 @@
             <br />
             <br />
             <br />
-<<<<<<< HEAD
-
-=======
            
->>>>>>> Admin
             <p>
                 @Html.ActionLink("Create New", "Create")
             </p>
@@ -75,29 +61,6 @@
                 </tr>
                 @if (Model != null)
                 {
-<<<<<<< HEAD
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.firstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.lastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Age)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.username)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.password)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.firstName }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.firstName })
-                        </td>
-                    </tr>
-=======
                     foreach (var item in Model)
                     {
                         <tr>
@@ -122,7 +85,6 @@
                             </td>
                         </tr>
                     }
->>>>>>> Admin
                 }
                 
 
@@ -133,10 +95,6 @@
             @Html.ActionLink("Ir a Tabla de Películas", "Index2")
 
 
-<<<<<<< HEAD
-            </div>
-=======
->>>>>>> Admin
         </div>
     </div>
 </body>

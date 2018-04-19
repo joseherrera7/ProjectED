@@ -1,0 +1,23 @@
+﻿@model ProjectED1.Models.Movie
+
+@{
+    ViewBag.Title = "Buscar";
+}
+<h2>Buscar Pelicula Guaflix</h2>
+<div>
+    <h4>Película</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.genre)
+        </dt>
+        
+    </dl>
+    <br />
+    @Html.ActionLink("Back to List", "Index")
